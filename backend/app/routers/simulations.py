@@ -58,6 +58,7 @@ async def create_simulation(
     return {
         "monto": monto,
         "cuota_mensual": cuota_mensual,
+        "tasa_mensual": tasa_mensual,
         "total_intereses": total_intereses,
         "tabla": tabla_amortizacion
     }
