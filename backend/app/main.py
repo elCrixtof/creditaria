@@ -1,19 +1,20 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from database import engine, Base
-import models
+from app.database import engine, Base
+from app.routers import simulations
+from app import models
 from contextlib import asynccontextmanager
 
 
-app = FastAPI()
-
-#Definir ciclo de vida
+# Crear tablas al arrancar
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     async with engine.begin() as conn:
         await conn.run_sync(Base.metadata.create_all)
     
     yield
+
+app = FastAPI()
 
 # Configurar CORS para que React (Vite) pueda conectarse
 app.add_middleware(
@@ -24,6 +25,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# routers
+app.include_router(simulations.router)
+
 @app.get("/")
 async def read_root():
-    return {"message": "¡Hola Christian! El backend está volando en Ubuntu"}
+    return {"message": "CreditSim API"}
