@@ -2,9 +2,9 @@ import {useState} from 'react'
 import api from '../api/axios'
 
 const SimulateView = () => {
-  const [monto, setMonto] = useState(3000)
-  const [tasa_anual, setTasa_Anual] = useState(15)
-  const [plazo_meses, setPlazo_Meses] = useState(6)
+  const [monto, setMonto] = useState(localStorage.getItem('monto'))
+  const [tasa_anual, setTasa_Anual] = useState(localStorage.getItem('tasa_anual'))
+  const [plazo_meses, setPlazo_Meses] = useState(localStorage.getItem('plazo_meses'))
   const [resultado, setResultado] = useState(null)
 
   const handleSubmit = async(e) => {
@@ -16,7 +16,9 @@ const SimulateView = () => {
         tasa_anual: tasa_anual,
         plazo_meses: plazo_meses
       })
-      
+      localStorage.setItem('monto', monto)
+      localStorage.setItem('tasa_anual', tasa_anual)
+      localStorage.setItem('plazo_meses', plazo_meses)
       setResultado(response.data)
     } catch (error) {
       console.error("Error al conectar con el Backend", error)
@@ -35,14 +37,20 @@ const SimulateView = () => {
               <div className="flex flex-col sm:flex-row gap-3">
                 <input
                   value={monto}
-                  onChange={(e) => setMonto(e.target.value)}
+                  onChange={(e) => {
+                    setMonto(e.target.value);
+                    setResultado(null);
+                  }}
                   type="number"
                   placeholder="Monto"
                   className="input input-bordered input-primary w-full max-w-xs"
                 />
                 <input
                   value={tasa_anual}
-                  onChange={(e) => setTasa_Anual(e.target.value)}
+                  onChange={(e) => {
+                    setTasa_Anual(e.target.value);
+                    setResultado(null);
+                  }}
                   type="number"
                   placeholder="Tasa Anual"
                   className="input input-bordered input-primary w-full max-w-xs"
@@ -50,7 +58,10 @@ const SimulateView = () => {
               </div>
               <input
                 value={plazo_meses}
-                onChange={(e) => setPlazo_Meses(e.target.value)}
+                onChange={(e) => {
+                    setPlazo_Meses(e.target.value);
+                    setResultado(null);
+                  }}
                 type="number"
                 placeholder="Plazo en meses"
                 className="input input-bordered input-primary w-full"
@@ -69,7 +80,7 @@ const SimulateView = () => {
                         {/* head */}
                         <thead>
                         <tr>
-                            <th>mes</th>
+                            <th>Mes</th>
                             <th>Saldo Actual</th>
                             <th>Cuota</th>
                             <th>Interes {resultado.tasa_mensual}</th>
@@ -96,55 +107,6 @@ const SimulateView = () => {
         </div>
       </div>
     </div>
-    // <div className='mockup-window border border-base-300 w-full'>
-    //     <div className='grid place-content-center border-t border-base-300 h-80'>
-    //         <h2>Simular Amortizacion</h2>
-    //             <fieldset onSubmit={handleSubmit} className='fieldset'>
-    //                 {/* <legend className='fieldset-legent'>Ingresa monto</legend> */}
-    //                 <label class='label'>Monto</label>
-    //                 <input 
-    //                     className='input' 
-    //                     type="number" 
-    //                     value={monto}
-    //                     onChange={(e) => setMonto(e.target.value)}
-    //                 />
-    //                 <label class='label'>Tasa Anual</label>
-    //                 <input 
-    //                     className='input' 
-    //                     type="number" 
-    //                     value={tasa_anual}
-    //                     onChange={(e) => setTasa_Anual(e.target.value)}
-    //                 />
-    //                 <label class='label'>Plazo en meses</label>
-    //                 <input 
-    //                     className='input' 
-    //                     type="number" 
-    //                     value={plazo_meses}
-    //                     onChange={(e) => setPlazo_Meses(e.target.value)}
-    //                 />
-    //                 <button 
-    //                     className='btn btn-neutral mt-4'
-    //                     type='submit'
-    //                 >
-    //                     Calcular
-    //                     </button>
-    //             </fieldset>
-    //     </div>
-    // </div>
-    // <div style={{padding:'20px'}}>
-    //   <h1>CreditSim</h1>
-    //   <form onSubmit={handleSubmit}>
-    //     <label>Monto del prestamo</label>
-    //     <input type="number" value={monto} onChange={(e) => setMonto(e.target.value)} />
-    //     <button type='submit'>Calcular</button>
-    //   </form>
-    //   {resultado && 
-    //     <div style={{ marginTop: '20px' }}>
-    //       <h3>Cuota mensual: ${resultado.cuota_mensual}</h3>
-    //       <p>Interes total: ${resultado.total_intereses}</p>
-    //     </div>
-    //   }
-    // </div>
   )
 }
 
