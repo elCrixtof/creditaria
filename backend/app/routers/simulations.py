@@ -29,11 +29,11 @@ async def create_simulation(
 
         fila = {
             'mes': mes,
-            'saldo_inicial': saldo_actual,
-            'cuota_mensual': cuota_mensual,
-            'interes_mensual': interes_mensual,
-            'capital': capital,
-            'saldo_final': saldo_final 
+            'saldo_inicial': round(saldo_actual, 2),
+            'cuota_mensual': round(cuota_mensual, 2),
+            'interes_mensual': round(interes_mensual, 2),
+            'capital': round(capital, 2),
+            'saldo_final': round(max(0, saldo_final), 2) 
         }
         tabla_amortizacion.append(fila)
 
