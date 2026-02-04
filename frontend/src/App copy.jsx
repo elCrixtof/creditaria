@@ -1,5 +1,4 @@
 import RegisterView from "./views/RegisterView";
-import SimulateView from "./views/SimulateView";
 
 function App() {
   return (
@@ -18,9 +17,9 @@ function App() {
       </div>
 
       {/* Contenedor Principal Centrado */}
-      <main className="flex flex-col items-center justify-center">
-        <div className="w-full">
-          <SimulateView />
+      <main className="flex flex-col items-center justify-center p-4 mt-10">
+        <div className="w-full max-w-md">
+           <RegisterView />
         </div>
       </main>
 

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import axios from 'axios';
+import api from '../api/axios'
 
 const RegisterView = () => {
     const [formData, setFormData] = useState({ username: '', password: '' });
