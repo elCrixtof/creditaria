@@ -17,5 +17,5 @@ class AmortizacionFila(BaseModel):
 class SimulacionRespuesta(BaseModel):
     monto: float
     cuota_mensual: float
-    interes_total: float
+    total_intereses: float
     tabla: List[AmortizacionFila]

@@ -56,8 +56,8 @@ async def create_simulation(
     background_task.add_task(services.auditoria)
 
     return {
-        "monto":3000,
-        "cuota_mensual": 15,
-        "interes_total": 6,
+        "monto": monto,
+        "cuota_mensual": cuota_mensual,
+        "total_intereses": total_intereses,
         "tabla": tabla_amortizacion
     }
