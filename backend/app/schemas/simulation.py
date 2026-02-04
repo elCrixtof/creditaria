@@ -10,7 +10,7 @@ class AmortizacionFila(BaseModel):
     mes: int
     saldo_inicial: float
     cuota_mensual: float
-    interes: float
+    interes_mensual: float
     capital: float
     saldo_final: float
 

@@ -14,4 +14,4 @@ class Simulacion(Base):
     # user_id = Column(Integer, ForeignKey("users.id"))
 
     # Relación inversa
-    owner = relationship("User", back_populates="simulations")
+    # owner = relationship("User", back_populates="simulations")

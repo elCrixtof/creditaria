@@ -14,7 +14,7 @@ async def lifespan(app: FastAPI):
     
     yield
 
-app = FastAPI()
+app = FastAPI(lifespan=lifespan)
 
 # Configurar CORS para que React (Vite) pueda conectarse
 app.add_middleware(
